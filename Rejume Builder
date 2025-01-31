@@ -1,1 +1,87 @@
 
+import React from 'react';
+import { useState } from "react";
+import './Simplef.css';
+import {Form, Button, Tabs, Tab, Badge } from "react-bootstrap";
+
+const App = () => {
+  const [workExperiences, setWorkExperiences] = useState([{ id: 1, title: "", company: "", location: "", startDate: "", endDate: "" }]);
+  
+  const addWorkExperience = () => {
+    setWorkExperiences([...workExperiences, { id: workExperiences.length + 1, title: "", company: "", location: "", startDate: "", endDate: "" }]);
+  };
+  return (
+    <>
+      <section className="hero-section text-white py-5" style={{ backgroundColor: '#7E67AC' }}>
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-md-6">
+              <h1 className="fw-bold">CREATE <span style={{ color: '#F6FF00' }}>OUR</span> RESUME</h1>
+              <a href="/" className="btn btn-light mt-3 fw-bold">CREATE NOW</a>
+            </div>
+            <div className="col-md-6 text-center">
+              <img className="img-style1"
+                src="images/laptop.JPG"
+                alt="Person with laptop"
+              
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p className="text-center mt-4">CREATE YOUR PROFESSIONAL RESUME NOW AND LAND YOUR DREAM JOB!</p>
+      <Tabs defaultActiveKey="workExperience" className="mb-3">
+        <Tab eventKey="basicInfo" title="Basic Info"></Tab>
+        <Tab eventKey="workExperience" title="Work Experience">
+          <Form>
+            {workExperiences.map((exp, index) => (
+              <div key={exp.id} className="mb-3 border p-3 rounded">
+                <h5>
+                  Work Experience {exp.id} <Badge bg="primary">X</Badge>
+                </h5>
+                <Form.Group className="mb-2">
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control type="text" placeholder="Job Title" />
+                </Form.Group>
+                <Form.Group className="mb-2">
+                  <Form.Label>Company Name</Form.Label>
+                  <Form.Control type="text" placeholder="Company Name" />
+                </Form.Group>
+                <Form.Group className="mb-2">
+                  <Form.Label>Location</Form.Label>
+                  <Form.Control type="text" placeholder="Location" />
+                </Form.Group>
+                <Form.Group className="mb-2">
+                  <Form.Label>Start Date</Form.Label>
+                  <Form.Control type="date" />
+                </Form.Group>
+                <Form.Group className="mb-2">
+                  <Form.Label>End Date</Form.Label>
+                  <Form.Control type="date" />
+                </Form.Group>
+              </div>
+            ))}
+            <Button variant="primary" onClick={addWorkExperience}>+ New</Button>
+          </Form>
+        </Tab>
+        <Tab eventKey="projects" title="Projects"></Tab>
+        <Tab eventKey="education" title="Education"></Tab>
+        <Tab eventKey="achievements" title="Achievements"></Tab>
+        <Tab eventKey="summary" title="Summary"></Tab>
+        <Tab eventKey="other" title="Other"></Tab>
+      </Tabs>
+      
+      <div className="text-end mt-3">
+        <Button variant="primary">Download ⬇</Button>
+      </div>
+ 
+
+    </>
+  );
+};
+      
+      
+
+export default App;
+
