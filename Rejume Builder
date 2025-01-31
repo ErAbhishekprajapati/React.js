@@ -5,251 +5,349 @@ import "./Simplef.css";
 const App = () => {
   const [activeTab, setActiveTab] = useState("basic-info");
 
+  // Store data for different forms
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    company: "",
+    position: "",
+    experience: "",
+    school: "",
+    educationPosition: "",
+    years: "",
+    achievementTitle: "",
+    achievementDescription: "",
+    achievementYear: "",
+    projectTitle: "",
+    projectDescription: "",
+    projectYear: "",
+    summary: "",
+    additionalInfoTitle: "",
+    additionalInfo: "",
+  });
+
   // Handle tab switching
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
 
-  // Form state and handlers for different sections
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    year: "",
-  });
-
+  // Handle form data change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  // Handle form submit
+  const handleSubmit = (e, tab) => {
     e.preventDefault();
-    console.log(`${activeTab} submitted:`, formData);
+    console.log(`${tab} submitted:`, formData);
   };
 
+  // Render the form based on the active tab
   const renderForm = (tab) => {
     switch (tab) {
       case "basic-info":
         return (
-          <form>
+          <form onSubmit={(e) => handleSubmit(e, "Basic Info")}>
             <div className="mb-3">
               <label className="form-label">Full Name</label>
-              <input type="text" className="form-control" placeholder="Enter your full name" required />
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+                required
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">Email</label>
-              <input type="email" className="form-control" placeholder="Enter your email" required />
+              <input
+                type="email"
+                className="form-control"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                required
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">Phone Number</label>
-              <input type="text" className="form-control" placeholder="Enter your phone number" required />
+              <input
+                type="text"
+                className="form-control"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter your phone number"
+                required
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">Address</label>
-              <input type="text" className="form-control" placeholder="Enter your address" required />
+              <input
+                type="text"
+                className="form-control"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                placeholder="Enter your address"
+                required
+              />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
           </form>
         );
 
       case "work-experience":
         return (
-          <form>
+          <form onSubmit={(e) => handleSubmit(e, "Work Experience")}>
             <div className="mb-3">
               <label className="form-label">Company Name</label>
-              <input type="text" className="form-control" placeholder="Enter company name" required />
+              <input
+                type="text"
+                className="form-control"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                placeholder="Enter company name"
+                required
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">Position</label>
-              <input type="text" className="form-control" placeholder="Enter your position" required />
+              <input
+                type="text"
+                className="form-control"
+                name="position"
+                value={formData.position}
+                onChange={handleChange}
+                placeholder="Enter your position"
+                required
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">Years of Experience</label>
-              <input type="text" className="form-control" placeholder="Enter number of years" required />
+              <input
+                type="text"
+                className="form-control"
+                name="experience"
+                value={formData.experience}
+                onChange={handleChange}
+                placeholder="Enter number of years"
+                required
+              />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
           </form>
         );
 
-      case "education":
+      case "projects":
         return (
-          <form>
+          <form onSubmit={(e) => handleSubmit(e, "Projects")}>
             <div className="mb-3">
-              <label className="form-label">School Name</label>
-              <input type="text" className="form-control" placeholder="Enter School name" required />
+              <label className="form-label">Project Title</label>
+              <input
+                type="text"
+                className="form-control"
+                name="projectTitle"
+                value={formData.projectTitle}
+                onChange={handleChange}
+                placeholder="Enter project title"
+                required
+              />
             </div>
             <div className="mb-3">
-              <label className="form-label">Position</label>
-              <input type="text" className="form-control" placeholder="Enter your position" required />
+              <label className="form-label">Project Description</label>
+              <textarea
+                className="form-control"
+                name="projectDescription"
+                value={formData.projectDescription}
+                onChange={handleChange}
+                placeholder="Enter project description"
+                required
+              />
             </div>
             <div className="mb-3">
-              <label className="form-label">Years of Pass</label>
-              <input type="text" className="form-control" placeholder="Enter number of years" required />
+              <label className="form-label">Project Year</label>
+              <input
+                type="text"
+                className="form-control"
+                name="projectYear"
+                value={formData.projectYear}
+                onChange={handleChange}
+                placeholder="Enter project year"
+                required
+              />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
           </form>
         );
 
       case "achievements":
         return (
-          <div className="container py-5">
-            <h2 className="text-center mb-4">Add Your Achievement</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label htmlFor="title" className="form-label">Achievement Title</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="title"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  placeholder="Enter Achievement Title"
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="description" className="form-label">Description</label>
-                <textarea
-                  className="form-control"
-                  id="description"
-                  name="description"
-                  rows="4"
-                  value={formData.description}
-                  onChange={handleChange}
-                  placeholder="Describe your achievement"
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="year" className="form-label">Year of Achievement</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="year"
-                  name="year"
-                  value={formData.year}
-                  onChange={handleChange}
-                  placeholder="Enter year of achievement"
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">Submit Achievement</button>
-            </form>
-          </div>
-        );
-
-      case "projects":
-        return (
-          <div className="container py-5">
-            <h2 className="text-center mb-4">Add Your Project</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label htmlFor="title" className="form-label">Project Title</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="title"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  placeholder="Enter Project Title"
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="description" className="form-label">Project Description</label>
-                <textarea
-                  className="form-control"
-                  id="description"
-                  name="description"
-                  rows="4"
-                  value={formData.description}
-                  onChange={handleChange}
-                  placeholder="Describe your project"
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="year" className="form-label">Project Year</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="year"
-                  name="year"
-                  value={formData.year}
-                  onChange={handleChange}
-                  placeholder="Enter year of project completion"
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">Submit Project</button>
-            </form>
-          </div>
+          <form onSubmit={(e) => handleSubmit(e, "Achievements")}>
+            <div className="mb-3">
+              <label className="form-label">Achievement Title</label>
+              <input
+                type="text"
+                className="form-control"
+                name="achievementTitle"
+                value={formData.achievementTitle}
+                onChange={handleChange}
+                placeholder="Enter achievement title"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Achievement Description</label>
+              <textarea
+                className="form-control"
+                name="achievementDescription"
+                value={formData.achievementDescription}
+                onChange={handleChange}
+                placeholder="Enter achievement description"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Achievement Year</label>
+              <input
+                type="text"
+                className="form-control"
+                name="achievementYear"
+                value={formData.achievementYear}
+                onChange={handleChange}
+                placeholder="Enter achievement year"
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
         );
 
       case "summary":
         return (
-          <div className="container py-5">
-            <h2 className="text-center mb-4">Add Your Summary</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label htmlFor="description" className="form-label">Summary</label>
-                <textarea
-                  className="form-control"
-                  id="description"
-                  name="description"
-                  rows="4"
-                  value={formData.description}
-                  onChange={handleChange}
-                  placeholder="Describe your professional summary"
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">Submit Summary</button>
-            </form>
-          </div>
+          <form onSubmit={(e) => handleSubmit(e, "Summary")}>
+            <div className="mb-3">
+              <label className="form-label">Summary</label>
+              <textarea
+                className="form-control"
+                name="summary"
+                value={formData.summary}
+                onChange={handleChange}
+                placeholder="Enter a short summary about yourself"
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
         );
 
       case "other":
         return (
-          <div className="container py-5">
-            <h2 className="text-center mb-4">Other Information</h2>
-            <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => handleSubmit(e, "Other Information")}>
+            <div className="mb-3">
+              <label className="form-label">Additional Info Title</label>
+              <input
+                type="text"
+                className="form-control"
+                name="additionalInfoTitle"
+                value={formData.additionalInfoTitle}
+                onChange={handleChange}
+                placeholder="Enter additional info title"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Additional Info</label>
+              <textarea
+                className="form-control"
+                name="additionalInfo"
+                value={formData.additionalInfo}
+                onChange={handleChange}
+                placeholder="Enter additional information"
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
+        );
+        case "education":
+          return (
+            <form onSubmit={(e) => handleSubmit(e, "Education")}>
               <div className="mb-3">
-                <label htmlFor="title" className="form-label">Additional Info Title</label>
+                <label className="form-label">School Name</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="title"
-                  name="title"
-                  value={formData.title}
+                  name="school"
+                  value={formData.school}
                   onChange={handleChange}
-                  placeholder="Enter additional info title"
+                  placeholder="Enter school name"
                   required
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="description" className="form-label">Details</label>
-                <textarea
+                <label className="form-label">Position/Qualification</label>
+                <input
+                  type="text"
                   className="form-control"
-                  id="description"
-                  name="description"
-                  rows="4"
-                  value={formData.description}
+                  name="educationPosition"
+                  value={formData.educationPosition}
                   onChange={handleChange}
-                  placeholder="Provide additional details"
+                  placeholder="Enter your position or qualification"
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-primary">Submit Info</button>
+              <div className="mb-3">
+                <label className="form-label">Years of Graduation</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="years"
+                  value={formData.years}
+                  onChange={handleChange}
+                  placeholder="Enter graduation year"
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
             </form>
-          </div>
-        );
-
+          );
+        
       default:
         return <div>No content available</div>;
     }
+  };
+
+  // Function to handle print
+  const handlePrint = () => {
+    const printContent = document.getElementById("printContent").innerHTML;
+    const printWindow = window.open("", "", "height=500,width=800");
+    printWindow.document.write("<html><head><title>Print Form Data</title></head><body>");
+    printWindow.document.write(printContent);
+    printWindow.document.write("</body></html>");
+    printWindow.document.close();
+    printWindow.print();
   };
 
   return (
@@ -288,7 +386,7 @@ const App = () => {
                 <a
                   className={`nav-link ${activeTab === tab ? "active" : ""}`}
                   onClick={() => handleTabClick(tab)}
-                  href="#!"  // Prevent default anchor link behavior
+                  href="#!"
                 >
                   {tab.replace("-", " ").toUpperCase()}
                 </a>
@@ -302,12 +400,67 @@ const App = () => {
               {renderForm(activeTab)}
             </div>
           </div>
-
-          {/* Download Button */}
-          <div className="mt-3 text-end">
-            <button className="btn btn-primary dropdown-toggle">Download</button>
-          </div>
         </div>
+      </div>
+
+    {/* Display Data for Printing */}
+<div id="printContent" className="mt-5">
+  <div className="resume-container">
+    <h3 className="text-center mb-4">Resume</h3>
+
+    <div className="personal-info">
+      <h4>{formData.name}</h4>
+      <p><strong>Email:</strong> {formData.email}</p>
+      <p><strong>Phone:</strong> {formData.phone}</p>
+      <p><strong>Address:</strong> {formData.address}</p>
+    </div>
+
+    <hr />
+
+    <div className="work-experience">
+      <h5>Work Experience</h5>
+      <p><strong>Company:</strong> {formData.company}</p>
+      <p><strong>Position:</strong> {formData.position}</p>
+      <p><strong>Experience:</strong> {formData.experience} years</p>
+    </div>
+
+    <hr />
+
+    <div className="education">
+      <h5>Education</h5>
+      <p><strong>School:</strong> {formData.school}</p>
+      <p><strong>Qualification/Position:</strong> {formData.educationPosition}</p>
+      <p><strong>Graduation Year:</strong> {formData.years}</p>
+    </div>
+
+    <hr />
+
+    <div className="achievements">
+      <h5>Achievements</h5>
+      <p><strong>Title:</strong> {formData.achievementTitle}</p>
+      <p><strong>Description:</strong> {formData.achievementDescription}</p>
+      <p><strong>Year:</strong> {formData.achievementYear}</p>
+    </div>
+
+    <hr />
+
+    {/* Summary Section */}
+    <div className="summary">
+      <h5>Summary</h5>
+      <p>{formData.summary}</p>
+    </div>
+
+    <hr />
+
+    {/* You can add more sections here for Projects, Skills, etc. */}
+  </div>
+</div>
+
+
+
+      {/* Print Button */}
+      <div className="text-center mt-4">
+        <button className="btn btn-success" onClick={handlePrint}>Print Our Resume</button>
       </div>
     </div>
   );
