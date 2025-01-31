@@ -1,87 +1,316 @@
-
-import React from 'react';
-import { useState } from "react";
-import './Simplef.css';
-import {Form, Button, Tabs, Tab, Badge } from "react-bootstrap";
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Simplef.css";
 
 const App = () => {
-  const [workExperiences, setWorkExperiences] = useState([{ id: 1, title: "", company: "", location: "", startDate: "", endDate: "" }]);
-  
-  const addWorkExperience = () => {
-    setWorkExperiences([...workExperiences, { id: workExperiences.length + 1, title: "", company: "", location: "", startDate: "", endDate: "" }]);
+  const [activeTab, setActiveTab] = useState("basic-info");
+
+  // Handle tab switching
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
   };
+
+  // Form state and handlers for different sections
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    year: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(`${activeTab} submitted:`, formData);
+  };
+
+  const renderForm = (tab) => {
+    switch (tab) {
+      case "basic-info":
+        return (
+          <form>
+            <div className="mb-3">
+              <label className="form-label">Full Name</label>
+              <input type="text" className="form-control" placeholder="Enter your full name" required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Email</label>
+              <input type="email" className="form-control" placeholder="Enter your email" required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Phone Number</label>
+              <input type="text" className="form-control" placeholder="Enter your phone number" required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Address</label>
+              <input type="text" className="form-control" placeholder="Enter your address" required />
+            </div>
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+        );
+
+      case "work-experience":
+        return (
+          <form>
+            <div className="mb-3">
+              <label className="form-label">Company Name</label>
+              <input type="text" className="form-control" placeholder="Enter company name" required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Position</label>
+              <input type="text" className="form-control" placeholder="Enter your position" required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Years of Experience</label>
+              <input type="text" className="form-control" placeholder="Enter number of years" required />
+            </div>
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+        );
+
+      case "education":
+        return (
+          <form>
+            <div className="mb-3">
+              <label className="form-label">School Name</label>
+              <input type="text" className="form-control" placeholder="Enter School name" required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Position</label>
+              <input type="text" className="form-control" placeholder="Enter your position" required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Years of Pass</label>
+              <input type="text" className="form-control" placeholder="Enter number of years" required />
+            </div>
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+        );
+
+      case "achievements":
+        return (
+          <div className="container py-5">
+            <h2 className="text-center mb-4">Add Your Achievement</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="title" className="form-label">Achievement Title</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  placeholder="Enter Achievement Title"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="description" className="form-label">Description</label>
+                <textarea
+                  className="form-control"
+                  id="description"
+                  name="description"
+                  rows="4"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Describe your achievement"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="year" className="form-label">Year of Achievement</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="year"
+                  name="year"
+                  value={formData.year}
+                  onChange={handleChange}
+                  placeholder="Enter year of achievement"
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">Submit Achievement</button>
+            </form>
+          </div>
+        );
+
+      case "projects":
+        return (
+          <div className="container py-5">
+            <h2 className="text-center mb-4">Add Your Project</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="title" className="form-label">Project Title</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  placeholder="Enter Project Title"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="description" className="form-label">Project Description</label>
+                <textarea
+                  className="form-control"
+                  id="description"
+                  name="description"
+                  rows="4"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Describe your project"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="year" className="form-label">Project Year</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="year"
+                  name="year"
+                  value={formData.year}
+                  onChange={handleChange}
+                  placeholder="Enter year of project completion"
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">Submit Project</button>
+            </form>
+          </div>
+        );
+
+      case "summary":
+        return (
+          <div className="container py-5">
+            <h2 className="text-center mb-4">Add Your Summary</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="description" className="form-label">Summary</label>
+                <textarea
+                  className="form-control"
+                  id="description"
+                  name="description"
+                  rows="4"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Describe your professional summary"
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">Submit Summary</button>
+            </form>
+          </div>
+        );
+
+      case "other":
+        return (
+          <div className="container py-5">
+            <h2 className="text-center mb-4">Other Information</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="title" className="form-label">Additional Info Title</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  placeholder="Enter additional info title"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="description" className="form-label">Details</label>
+                <textarea
+                  className="form-control"
+                  id="description"
+                  name="description"
+                  rows="4"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Provide additional details"
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">Submit Info</button>
+            </form>
+          </div>
+        );
+
+      default:
+        return <div>No content available</div>;
+    }
+  };
+
   return (
-    <>
+    <div>
+      {/* Hero Section */}
       <section className="hero-section text-white py-5" style={{ backgroundColor: '#7E67AC' }}>
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-6">
-              <h1 className="fw-bold">CREATE <span style={{ color: '#F6FF00' }}>OUR</span> RESUME</h1>
+              <h1 className="fw-bold">
+                CREATE <span style={{ color: '#F6FF00' }}>OUR</span> RESUME
+              </h1>
               <a href="/" className="btn btn-light mt-3 fw-bold">CREATE NOW</a>
             </div>
             <div className="col-md-6 text-center">
-              <img className="img-style1"
-                src="images/laptop.JPG"
+              <img
+                className="img-style1"
+                src="/images/laptop.JPG" // Ensure this path is correct in your public folder
                 alt="Person with laptop"
-              
               />
             </div>
           </div>
         </div>
+        <p className="text-center mt-4">
+          CREATE YOUR PROFESSIONAL RESUME NOW AND LAND YOUR DREAM JOB!
+        </p>
       </section>
 
-      <p className="text-center mt-4">CREATE YOUR PROFESSIONAL RESUME NOW AND LAND YOUR DREAM JOB!</p>
-      <Tabs defaultActiveKey="workExperience" className="mb-3">
-        <Tab eventKey="basicInfo" title="Basic Info"></Tab>
-        <Tab eventKey="workExperience" title="Work Experience">
-          <Form>
-            {workExperiences.map((exp, index) => (
-              <div key={exp.id} className="mb-3 border p-3 rounded">
-                <h5>
-                  Work Experience {exp.id} <Badge bg="primary">X</Badge>
-                </h5>
-                <Form.Group className="mb-2">
-                  <Form.Label>Title</Form.Label>
-                  <Form.Control type="text" placeholder="Job Title" />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Company Name</Form.Label>
-                  <Form.Control type="text" placeholder="Company Name" />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Location</Form.Label>
-                  <Form.Control type="text" placeholder="Location" />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Start Date</Form.Label>
-                  <Form.Control type="date" />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>End Date</Form.Label>
-                  <Form.Control type="date" />
-                </Form.Group>
-              </div>
+      {/* Tabbed Content */}
+      <div className="p-4">
+        <div className="container">
+          {/* Tabs */}
+          <ul className="nav nav-tabs">
+            {["basic-info", "work-experience", "projects", "education", "achievements", "summary", "other"].map((tab) => (
+              <li className="nav-item" key={tab}>
+                <a
+                  className={`nav-link ${activeTab === tab ? "active" : ""}`}
+                  onClick={() => handleTabClick(tab)}
+                  href="#!"  // Prevent default anchor link behavior
+                >
+                  {tab.replace("-", " ").toUpperCase()}
+                </a>
+              </li>
             ))}
-            <Button variant="primary" onClick={addWorkExperience}>+ New</Button>
-          </Form>
-        </Tab>
-        <Tab eventKey="projects" title="Projects"></Tab>
-        <Tab eventKey="education" title="Education"></Tab>
-        <Tab eventKey="achievements" title="Achievements"></Tab>
-        <Tab eventKey="summary" title="Summary"></Tab>
-        <Tab eventKey="other" title="Other"></Tab>
-      </Tabs>
-      
-      <div className="text-end mt-3">
-        <Button variant="primary">Download ⬇</Button>
-      </div>
- 
+          </ul>
 
-    </>
+          {/* Tab Content */}
+          <div className="tab-content mt-3">
+            <div className="tab-pane fade show active">
+              {renderForm(activeTab)}
+            </div>
+          </div>
+
+          {/* Download Button */}
+          <div className="mt-3 text-end">
+            <button className="btn btn-primary dropdown-toggle">Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
-      
-      
 
 export default App;
-
