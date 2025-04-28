@@ -1,0 +1,119 @@
+/* General Styles */
+.resume-builder {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.highlight {
+  color: #F6FF00;
+}
+
+/* Header Styles */
+.resume-header {
+  background: linear-gradient(135deg, #7E67AC 0%, #4B2E83 100%);
+}
+
+/* Sidebar Styles */
+.sidebar-nav .list-group-item {
+  border-left: 0;
+  border-right: 0;
+  padding: 12px 20px;
+  transition: all 0.3s;
+}
+
+.sidebar-nav .list-group-item.active {
+  background-color: #7E67AC;
+  border-color: #7E67AC;
+}
+
+.sidebar-nav .list-group-item:first-child {
+  border-top: 0;
+}
+
+/* Resume Template Styles */
+.resume-template {
+  background: white;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.resume-header {
+  background: #7E67AC;
+  color: white;
+  padding: 30px;
+}
+
+.resume-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.contact-info {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.resume-content {
+  padding: 30px;
+}
+
+.section-title {
+  color: #7E67AC;
+  border-bottom: 2px solid #7E67AC;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.experience-item, .education-item, .project-item, .achievement-item {
+  margin-bottom: 20px;
+}
+
+.experience-item h4, .education-item h4, .project-item h4, .achievement-item h4 {
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-badge {
+  background: #7E67AC;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: #7E67AC;
+  border-color: #7E67AC;
+}
+
+.btn-primary:hover {
+  background-color: #5E4D8B;
+  border-color: #5E4D8B;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .sidebar-nav {
+    margin-bottom: 20px;
+  }
+  
+  .resume-header {
+    padding: 20px;
+  }
+  
+  .resume-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .resume-content {
+    padding: 20px;
+  }
+}
